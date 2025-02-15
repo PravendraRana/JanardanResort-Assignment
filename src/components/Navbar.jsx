@@ -27,7 +27,7 @@ const Navbar = ({
   const theme = useTheme();
   
   return (
-    <AppBar position="static" color="default">
+    <AppBar position="fixed" color="default">
       <Toolbar>
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
           ShopApp

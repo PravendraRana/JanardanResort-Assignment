@@ -10,13 +10,13 @@ import Navbar from "./components/Navbar";
 import SearchBar from "./components/SearchBar";
 import Sidebar from "./components/Sidebar";
 import ProductGrid from "./components/ProductGrid";
-import { MOCK_PRODUCTS, MOCK_CATEGORIES } from "./data/mockData";
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
+  const [categories, setCategories] = useState([]);  
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [cartCount, setCartCount] = useState(0);
   const [searchQuery, setSearchQuery] = useState("");
@@ -30,14 +30,24 @@ const App = () => {
   useEffect(() => {
     // In a real app, you would fetch from the API here
     fetch("https://fakestoreapi.com/products")
-      .then((res) => res.json)
-      .then((data) =>{
+      .then((res) => res.json())
+      .then((data) => {
         setProducts(data);
         setFilteredProducts(data);
       })
       .catch((error) => {
         console.error("Error fetching data: ", error.message);
       });
+
+    fetch("https://fakestoreapi.com/products/categories")
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        setCategories(data);
+    })
+    .catch((error) => { 
+      console.error("Error fetching data: ", error.message);
+    });
                  
     //setProducts(MOCK_PRODUCTS);
     //setFilteredProducts(MOCK_RODUCTS);
@@ -105,7 +115,7 @@ const App = () => {
           <SearchBar onSearch={handleSearch} />
           <Box sx={{ display: "flex", gap: 2 }}>
             <Sidebar
-              categories={MOCK_CATEGORIES}
+              categories={categories}
               selectedCategory={selectedCategory}
               onSelectCategory={setSelectedCategory}
             />

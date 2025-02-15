@@ -72,7 +72,9 @@ const Sidebar = ({ categories, selectedCategory, onSelectCategory }) => {
             "& .MuiDrawer-paper": {
               width: 240,
               boxSizing: "border-box",
-              position: "static",
+              position: "fixed",
+              height: "calc(100% - 64px)", // Full height minus navbar height
+              top: "66px",
             },
           }}
         >
