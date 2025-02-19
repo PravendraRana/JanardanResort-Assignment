@@ -12,8 +12,6 @@ const SearchBar = ({ onSearch }) => (
       width: "100%",
       maxWidth: 600,
       mx: "auto",
-      mt: 2,
-      mb: 2,
     }}
   >
     <InputBase
@@ -21,7 +19,7 @@ const SearchBar = ({ onSearch }) => (
       placeholder="Search products..."
       onChange={(e) => onSearch(e.target.value)}
     />
-    <IconButton type="button" sx={{ p: "10px" }} aria-label="search">
+    <IconButton type="button" sx={{ p: "0.5rem" }} aria-label="search">
       <Search />
     </IconButton>
   </Paper>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   AppBar,
   Toolbar,
@@ -7,6 +7,7 @@ import {
   IconButton,
   Badge,
   useTheme,
+  Box,
 } from '@mui/material';
 import {
   ShoppingCart,
@@ -15,6 +16,18 @@ import {
   Login,
   Logout,
 } from '@mui/icons-material';
+import SearchBar from './SearchBar'; 
+import { GoogleLogin, googleLogout } from '@react-oauth/google'; 
+import { jwtDecode } from 'jwt-decode';
+
+const GoogleLoginComponent = ({ onLoginSuccess }) => {
+  return (
+    <GoogleLogin
+      onSuccess={onLoginSuccess}
+      onError={() => console.log('Login Failed')}
+    />
+  );
+};
 
 const Navbar = ({ 
   isLoggedIn, 
@@ -22,9 +35,22 @@ const Navbar = ({
   onLogout, 
   darkMode, 
   toggleDarkMode, 
-  cartCount
+  cartCount,
+  onSearch,
 }) => {
   const theme = useTheme();
+  const [user, setUser] = useState(null);
+
+  const handleLoginSuccess = (response) => {
+    const decodedUser = jwtDecode(response.credential);
+    setUser(decodedUser);
+  };
+
+  const handleLogout = () => {
+    googleLogout();
+    setUser(null);
+  };
+
   
   return (
     <AppBar position="fixed" color="default">
@@ -32,6 +58,9 @@ const Navbar = ({
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
           ShopApp
         </Typography>
+        <Box sx={{ flexGrow: 1, display: 'flex', justifyContent: 'center', mr: 28 }}>
+          <SearchBar onSearch={onSearch} />
+        </Box>
         <IconButton onClick={toggleDarkMode} color="inherit">
           {darkMode ? <Brightness7 /> : <Brightness4 />}
         </IconButton>
@@ -40,7 +69,7 @@ const Navbar = ({
             <ShoppingCart />
           </Badge>
         </IconButton>
-        {isLoggedIn ? (
+        {/* {isLoggedIn ? (
           <Button 
             color="inherit" 
             onClick={onLogout} 
@@ -56,6 +85,13 @@ const Navbar = ({
           >
             Login
           </Button>
+        )} */}
+        {user ? (
+          <Button color="inherit" onClick={handleLogout} startIcon={<Logout />}>
+            Logout
+          </Button>
+        ) : (
+          <GoogleLoginComponent onLoginSuccess={handleLoginSuccess} />
         )}
       </Toolbar>
     </AppBar>

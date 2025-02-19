@@ -5,7 +5,6 @@ import {
   ListItem,
   ListItemButton,
   ListItemText,
-  Typography,
   IconButton,
   useMediaQuery,
   useTheme,
@@ -43,7 +42,7 @@ const Sidebar = ({ categories, selectedCategory, onSelectCategory }) => {
           aria-label="open drawer"
           edge="start"
           onClick={() => setMobileOpen(!mobileOpen)}
-          sx={{ mb: 2 }}
+          sx={{ position: "fixed", top: "2rem", left: "3.5rem", zIndex: 1300 }}
         >
           <Menu />
         </IconButton>
@@ -57,7 +56,8 @@ const Sidebar = ({ categories, selectedCategory, onSelectCategory }) => {
           sx={{
             "& .MuiDrawer-paper": {
               boxSizing: "border-box",
-              width: 240,
+              width: "15rem",
+              top: "4rem",
             },
           }}
         >
@@ -67,14 +67,14 @@ const Sidebar = ({ categories, selectedCategory, onSelectCategory }) => {
         <Drawer
           variant="permanent"
           sx={{
-            width: 240,
+            width: "15rem",
             flexShrink: 0,
             "& .MuiDrawer-paper": {
-              width: 240,
+              width: "15rem",
               boxSizing: "border-box",
               position: "fixed",
-              height: "calc(100% - 64px)", // Full height minus navbar height
-              top: "66px",
+              height: "calc(100% - 4.125rem)", // Full height minus navbar height
+              top: "4.125rem",
             },
           }}
         >

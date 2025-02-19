@@ -7,7 +7,6 @@ import {
   Container,
 } from "@mui/material";
 import Navbar from "./components/Navbar";
-import SearchBar from "./components/SearchBar";
 import Sidebar from "./components/Sidebar";
 import ProductGrid from "./components/ProductGrid";
 
@@ -28,7 +27,7 @@ const App = () => {
   });
 
   useEffect(() => {
-    // In a real app, you would fetch from the API here
+    
     fetch("https://fakestoreapi.com/products")
       .then((res) => res.json())
       .then((data) => {
@@ -49,8 +48,6 @@ const App = () => {
       console.error("Error fetching data: ", error.message);
     });
                  
-    //setProducts(MOCK_PRODUCTS);
-    //setFilteredProducts(MOCK_RODUCTS);
   }, []);
 
   useEffect(() => {
@@ -110,16 +107,17 @@ const App = () => {
           darkMode={darkMode}
           toggleDarkMode={toggleDarkMode}
           cartCount={cartCount}
+          onSearch={handleSearch}
         />
         <Container maxWidth="xl">
-          <SearchBar onSearch={handleSearch} />
+          {/* <SearchBar onSearch={handleSearch} /> */}
           <Box sx={{ display: "flex", gap: 2 }}>
             <Sidebar
               categories={categories}
               selectedCategory={selectedCategory}
               onSelectCategory={setSelectedCategory}
             />
-            <Box sx={{ flexGrow: 1 }}>
+            <Box sx={{ flexGrow: 1, mt: 10 }}>
               <ProductGrid
                 products={filteredProducts}
                 onAddToCart={handleAddToCart}

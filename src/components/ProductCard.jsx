@@ -14,10 +14,10 @@ const ProductCard = ({ product, onAddToCart }) => (
   <Card sx={{ height: "100%", display: "flex", flexDirection: "column" }}>
     <CardMedia
       component="img"
-      height="200"
+      height= {200}
       image={product.image}
       alt={product.title}
-      sx={{ objectFit: "cover" }}
+      sx={{ objectFit: "contain", mt: 1 }}
     />
     <CardContent sx={{ flexGrow: 1 }}>
       <Typography gutterBottom variant="h6" component="div" noWrap>
@@ -40,7 +40,7 @@ const ProductCard = ({ product, onAddToCart }) => (
         style={{
           display: "flex",
           justifyContent: "space-between",
-          marginTop: 8,
+          marginTop: 10,
         }}
       >
         <Chip label={product.category} size="small" />
