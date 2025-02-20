@@ -80,16 +80,6 @@ const App = () => {
     setCartCount((prev) => prev + 1);
   };
 
-  const handleLogin = () => {
-    // Simulate Google login
-    setIsLoggedIn(true);
-  };
-
-  const handleLogout = () => {
-    setIsLoggedIn(false);
-    setCartCount(0);
-  };
-
   const toggleDarkMode = () => {
     setDarkMode((prev) => !prev);
   };
@@ -101,17 +91,13 @@ const App = () => {
         sx={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}
       >
         <Navbar
-          isLoggedIn={isLoggedIn}
-          onLogin={handleLogin}
-          onLogout={handleLogout}
           darkMode={darkMode}
           toggleDarkMode={toggleDarkMode}
           cartCount={cartCount}
           onSearch={handleSearch}
         />
         <Container maxWidth="xl">
-          {/* <SearchBar onSearch={handleSearch} /> */}
-          <Box sx={{ display: "flex", gap: 2 }}>
+          <Box sx={{ display: "flex" }}>
             <Sidebar
               categories={categories}
               selectedCategory={selectedCategory}

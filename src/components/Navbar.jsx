@@ -29,17 +29,14 @@ const GoogleLoginComponent = ({ onLoginSuccess }) => {
   );
 };
 
-const Navbar = ({ 
-  isLoggedIn, 
-  onLogin, 
-  onLogout, 
+const Navbar = ({  
   darkMode, 
   toggleDarkMode, 
   cartCount,
   onSearch,
 }) => {
   const theme = useTheme();
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(null); 
 
   const handleLoginSuccess = (response) => {
     const decodedUser = jwtDecode(response.credential);
@@ -55,10 +52,10 @@ const Navbar = ({
   return (
     <AppBar position="fixed" color="default">
       <Toolbar>
-        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+        <Typography variant="h6" component="div" sx={{ flexGrow: 1, mr: 2 }}>
           ShopApp
         </Typography>
-        <Box sx={{ flexGrow: 1, display: 'flex', justifyContent: 'center', mr: 28 }}>
+        <Box sx={{ flexGrow: 1, display: 'flex', justifyContent: 'center', mr: 24 }}>
           <SearchBar onSearch={onSearch} />
         </Box>
         <IconButton onClick={toggleDarkMode} color="inherit">
@@ -69,23 +66,6 @@ const Navbar = ({
             <ShoppingCart />
           </Badge>
         </IconButton>
-        {/* {isLoggedIn ? (
-          <Button 
-            color="inherit" 
-            onClick={onLogout} 
-            startIcon={<Logout />}
-          >
-            Logout
-          </Button>
-        ) : (
-          <Button 
-            color="inherit" 
-            onClick={onLogin} 
-            startIcon={<Login />}
-          >
-            Login
-          </Button>
-        )} */}
         {user ? (
           <Button color="inherit" onClick={handleLogout} startIcon={<Logout />}>
             Logout
